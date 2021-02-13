@@ -37,6 +37,8 @@ body {
 
 .container {
   display: grid;
+
+  // Row tracks
   // We are goint go think about responsiveness from the beginning in our definition
   // of our grid tracks.
   // Header/Realtors: 80% of the viewport height
@@ -46,4 +48,36 @@ body {
   // Gallery: we want the height of its content (adapted to the content)
   // Footer: we want the height of its content (adapted to the content)
   grid-template-rows: 80vh min-content 40vw repeat(3, min-content);
+
+  // Column tracks
+  // It's very common in web design to use a design grid, with like 8 or 12 or 16
+  // predefined columns. We are going to use 8 columns.
+  // We want that each of our 8 columns have a fixed width (1142px / 8 columns = 142.5px)
+  // so 14rem. Note: We use 1142px for the width (we could use 1200px too for example, but
+  // remember that we have not used space for the sidebar yet)
+  // And we want them to adapt to the width, so we use minmax().
+  // But the width cannot be lower than the min-content()
+  // So the width would be between the minimal content and 14 rem, making it responsive.
+  // Now, for the sidebar we are going to add another column with 8rem.
+  // The last step is to center the columns between the end of the page and the sidebar.
+  // For this we are going to add 2 more columns, the 1fr columns.
+  // Now, if you would want a full-bleed section, you can occupy these 2 columns, and
+  // we would have a section that goes all the way from the left side to the right side,
+  // and with that you could kind of break the inner 8 column layout.
+  // Note that the minimum width is 6rem because we want to enforce a margin between
+  // the content and the end of the page.
+  // We are going to name the column tracks too.
+  grid-template-columns:
+    [sidebar-start] 8rem [sidebar-end full-start] minmax(6rem, 1fr)
+    [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end])
+    [center-end] minmax(6rem, 1fr) [full-end];
+
+  // We have named the columns but not the rows, because in an overall layout like this,
+  // the focus is always more on the columns and not so much on the rows.
+
+  // For development purposes
+  & > * {
+    padding: 40px;
+    font-size: 3rem;
+  }
 }
