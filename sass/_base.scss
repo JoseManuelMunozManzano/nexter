@@ -34,3 +34,16 @@ body {
   font-weight: 300;
   line-height: 1.6;
 }
+
+.container {
+  display: grid;
+  // We are goint go think about responsiveness from the beginning in our definition
+  // of our grid tracks.
+  // Header/Realtors: 80% of the viewport height
+  // Features: adapted to the content
+  // Story: 40% of the viewport width
+  // Homes: we want the height of its content (adapted to the content)
+  // Gallery: we want the height of its content (adapted to the content)
+  // Footer: we want the height of its content (adapted to the content)
+  grid-template-rows: 80vh min-content 40vw repeat(3, min-content);
+}
