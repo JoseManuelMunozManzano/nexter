@@ -7,5 +7,36 @@
   &__content {
     background-color: $color-grey-light-1;
     grid-column: col-start 5 / full-end;
+
+    // A percentage of the viewport (8vw) is much better than a hardcoded value, because
+    // if you resize the page, at some point there is not enough space for the element
+    // and a lot of padding space on the left and right side.
+    // The viewport width unit is getting more and more used for building these really
+    // truly responsive layouts.
+    padding: 6rem 8vw;
+
+    // Vertically center all elements in its parent container
+    // This is just a one-dimensional layout (vertical elements) with nothing at their
+    // side. So, we can use Flexbox here this way:
+    /*
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    */
+    // Or using Grid for a one-dimensional layout, and that's, I think, a bit weird, a
+    // little counter-intuitive, because for that we have Flexbox.
+    // But actually you can do that, and in this case there are less lines of code.
+    display: grid;
+    align-content: center;
+    justify-items: start;
+  }
+
+  // This element is not reusable, so in index.html we don't use the helper classes
+  // mb-xx that we created in _typrography.css
+  &__text {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 4rem;
   }
 }
