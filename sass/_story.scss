@@ -2,6 +2,55 @@
   &__pictures {
     background-color: $color-primary;
     grid-column: full-start / col-end 4;
+    background-image: linear-gradient(
+        rgba($color-primary, 0.5),
+        rgba($color-primary, 0.5)
+      ),
+      url(../img/back.jpg);
+
+    // We are going to create a 6x6 grid.
+    // 4/6 of the container for the images and the other 2/6 as the remaining space.
+    // Of couse, we could do the positioning of the images using absolute positioning too.
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+    // To center images in its defined grid area (see below)
+    align-items: center;
+  }
+
+  &__img--1 {
+    // We always should specify a width in percertages for images so that they stay
+    // flexible.
+    width: 100%;
+    grid-row: 2 / 6;
+    grid-column: 2 / 6;
+    // We have a problem with images. They don't have to fill up it's entire grid area
+    // unlike other regular grid items (like divs). Images are different in a sense that
+    // they have an intrinsic aspect-ratio associated with them, so meaning that they have
+    // some dimensions and therefore also an aspect-ratio that they want to keep, even if
+    // we tell them that it should fill up the entire grid area.
+    // Now, if you want the image to be truly in the center of its grid area, we can simply
+    // set the align-items property to center in its container (see above).
+
+    box-shadow: 0 2rem 5rem rgba(#000, 0.1);
+  }
+
+  &__img--2 {
+    // We increase the width in order to overlap the image.
+    //width: 100%;
+    width: 115%;
+    // To see it we have to modify the z-index.
+    z-index: 20;
+
+    grid-row: 4 / 6;
+    grid-column: 4 / 7;
+    // Now, how do we achive that an image overlaps its grid area? We have 2 ways:
+    //  1. We could use a transform and simply scale it up a little bit, but then
+    //     it wouldn't really start when we want in grid-row 4, grid-column 4, unless
+    //     we then also define the transform origin, which it's a bit too much.
+    //  2. Change the width of the image. See width
+
+    box-shadow: 0 2rem 5rem rgba(#000, 0.2);
   }
 
   &__content {
