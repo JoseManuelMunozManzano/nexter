@@ -11,27 +11,95 @@
 .home {
   background-color: $color-grey-light-1;
 
+  // We are going to define the columns and then the rows will be put
+  // automatically in there by CSS. This is a kind of pattern.
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  // In order to get along with the space between &__name and &__location...
+  // But it's not perfect and we have to add a little margin to &__location and &__rooms.
+  row-gap: 3.5rem;
+
   &__img {
     width: 100%;
+    // In order to see the img and the like both joined in the cell grid.
+    grid-row: 1 / 2;
+    grid-column: 1 / -1;
+    // I want the like icon to be on top of the image
+    z-index: 1;
   }
 
+  // overlapping: placing this grid item on top of the image, in another grid cell.
+  // The problem is that the automatic-placement algorithm doesn't automatically put
+  // grid items one on top on another.
+  // So we have to specify that. See &__img, property grid-row: 1 / 2;
   &__like {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+
+    fill: $color-primary;
+    height: 2.5rem;
+    width: 2.5rem;
+    // I want the like icon to be on top of the image
+    z-index: 2;
+    justify-self: end;
+    margin: 1rem;
   }
 
   &__name {
+    grid-column: 1 / -1;
+
+    font-family: $font-display;
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 1.25rem;
+    background-color: $color-secondary;
+    color: #fff;
+    font-weight: 400;
+
+    // Centering the grid item
+    width: 80%;
+    justify-self: center;
+
+    // Moved up a bit
+    // 1. Move it up from there, but then that would create a half-empty row. BAD
+    // 2. To place the grid item right in the first row, using overlapping once again. OK
+    grid-row: 1 / 2;
+    z-index: 3;
+    align-self: end;
+
+    // Now we move it down with a simple translate
+    transform: translateY(50%);
+  }
+
+  &__location,
+  &__rooms {
+    margin-top: 2.5rem;
   }
 
   &__location,
   &__rooms,
   &__area,
   &__price {
+    font-size: 1.5rem;
+    margin-left: 2rem;
+
+    // For putting side by side the svg and the p elements
+    display: flex;
+    align-items: center;
+
     svg {
       fill: $color-primary;
       height: 2rem;
       width: 2rem;
+      margin-right: 1rem; // In Flexbox we don't have gap
     }
 
-    p {
-    }
+    // I don't need this selector because the font-size is inherited from above (1.5rem)
+    // p {}
+  }
+
+  &__btn {
+    grid-column: 1 / -1;
   }
 }
