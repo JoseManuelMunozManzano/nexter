@@ -11,6 +11,11 @@
 // In a mixin, the code inside %heading would be pasted inside heding-1.
 .heading-1 {
   @extend %heading;
+  font-size: 4.5rem;
+  color: $color-grey-light-1;
+  // For a situation when we have two lines, we don't want all the spacing between
+  // two lines.
+  line-height: 1;
 }
 
 .heading-2 {
