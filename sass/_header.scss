@@ -11,6 +11,8 @@
   padding: 8rem;
   padding-top: 4rem;
 
+  // We are going to have a very dynamic spacing here in a vertical direction in this
+  // component, thanks to the viewport height and the power of fractional unit.
   display: grid;
   // Imagine that we want to have the logo on the top and then push all of these other
   // elements to the bottom. We can do this with fr, and then simply allow all the other
@@ -42,12 +44,44 @@
     justify-self: start;
   }
 
+  // We are going to use grid here as well.
+  // Even text can be treated as a grid item.
+  // And what can also be grid items are pseudo-elements, and the trick here is to use
+  // ::before pseudo-element and one ::after pseudo-element to create the two lines that
+  // we want.
+  // So we'll have 3 grid items.
   &__seenon-text {
+    display: grid;
+    grid-template-columns: 1fr max-content 1fr;
+    column-gap: 1.5rem;
+    align-items: center;
+
+    font-size: 1.6rem;
+    color: $color-grey-light-2;
+
+    &::before,
+    &::after {
+      content: '';
+      height: 1px;
+      display: block;
+      // currentColor takes the current text color, so the one defined in the color
+      // property and simply uses that one.
+      // This way, we avoid to duplicate $color-grey-light-2
+      background-color: currentColor;
+    }
   }
 
   &__seenon-logos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 3rem;
+    justify-items: center;
+
     img {
       height: 2.5rem;
+      // 100% is de default, and if we set it to anything less that 70%, the image gets
+      // darker, and if we set it to something above 100%, the image gets lighter.
+      filter: brightness(70%);
     }
   }
 }
