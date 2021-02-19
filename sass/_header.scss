@@ -25,8 +25,11 @@
   // you look at it sort of backwards; you have 6 items total, the last 5 items take up
   // only as much space as they need for their individual contents. That leaves the whole
   // rest of the grid to be taken up by the first item.
-  grid-template-rows: 1fr min-content 6rem 1fr;
-  grid-template-columns: max-content;
+  //grid-template-rows: 1fr min-content 6rem 1fr;
+  // Added minmax to fix the text The ultimate personal freedom
+  grid-template-rows: 1fr min-content minmax(6rem, min-content) 1fr;
+  //grid-template-columns: max-content;
+  grid-template-columns: minmax(min-content, max-content);
 
   // We cannot really style these gaps here individually. And instead we can increase
   // the row size (see above min-content 6rem)
@@ -76,9 +79,16 @@
     grid-template-columns: repeat(4, 1fr);
     column-gap: 3rem;
     justify-items: center;
+    align-items: center;
 
     img {
-      height: 2.5rem;
+      // The height can be 2.5rem, but it can also be less than that.
+      // And the same here for the width.
+      // But it's still not decreasing. Why? Because of the definition that we have in the
+      // header that the column should be the max-content
+      // So we are going to comment grid-template-columns: max-content; above
+      max-height: 2.5rem;
+      max-width: 100%;
       // 100% is de default, and if we set it to anything less that 70%, the image gets
       // darker, and if we set it to something above 100%, the image gets lighter.
       filter: brightness(70%);
