@@ -1,4 +1,43 @@
 .realtors {
   background-color: $color-secondary;
   grid-column: col-start 7 / full-end;
+  padding: 3rem;
+
+  // Centering all in the parent element, both horizontally and vertically.
+  // How do we can do that?
+  //  1. Using Flexbox
+  //  2. Using Grid. We are going to use grid because this is a grid project.
+  //     We will have a grid with one column and with two rows (heading and images/text)
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  // Why did this last property only affect the title and did nothing with the images/text?
+  // This is because the images/text content is actually what defines the width of the
+  // grid, and so centering does nothing there because this grid cell is already the size
+  // of the entire track and the entire grid container.
+  justify-items: center;
+  row-gap: 2rem;
+
+  &__list {
+    display: grid;
+    // The first column is for the images and the second is for the text.
+    grid-template-columns: min-content max-content;
+    column-gap: 2rem;
+    // Using vh in order to change, whenever se change the height of the viewport.
+    // That's because on a really large screen, this start to look really ridiculous.
+    row-gap: 5vh;
+    align-items: center;
+  }
+
+  &__img {
+    width: 7rem;
+    border-radius: 50%;
+    display: block;
+  }
+
+  &__sold {
+    text-transform: uppercase;
+    color: $color-grey-light-2;
+    margin-top: -3px;
+  }
 }
