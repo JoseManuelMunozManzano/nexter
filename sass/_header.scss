@@ -37,6 +37,15 @@
 
   justify-content: center;
 
+  @media only screen and (max-width: $bp-medium) {
+    // Spanning the entire viewport
+    grid-column: 1 / -1;
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    padding: 5rem;
+  }
+
   &__logo {
     height: 3rem;
     justify-self: center;

@@ -7,6 +7,7 @@
         rgba($color-primary, 0.5)
       ),
       url(../img/back.jpg);
+    background-size: cover;
 
     // We are going to create a 6x6 grid.
     // 4/6 of the container for the images and the other 2/6 as the remaining space.
@@ -16,6 +17,12 @@
     grid-template-columns: repeat(6, 1fr);
     // To center images in its defined grid area (see below)
     align-items: center;
+
+    @media only screen and (max-width: $bp-medium) {
+      // Spanning the entire viewport
+      grid-column: 1 / -1;
+      padding: 6rem;
+    }
   }
 
   &__img--1 {
@@ -33,6 +40,11 @@
     // set the align-items property to center in its container (see above).
 
     box-shadow: 0 2rem 5rem rgba(#000, 0.1);
+
+    @media only screen and (max-width: $bp-medium) {
+      grid-column: 1 / 5;
+      grid-row: 1 / -1;
+    }
   }
 
   &__img--2 {
@@ -51,6 +63,11 @@
     //  2. Change the width of the image. See width
 
     box-shadow: 0 2rem 5rem rgba(#000, 0.2);
+
+    @media only screen and (max-width: $bp-medium) {
+      grid-row: 1 / -1;
+      width: 100%;
+    }
   }
 
   &__content {
@@ -79,6 +96,14 @@
     display: grid;
     align-content: center;
     justify-items: start;
+
+    @media only screen and (max-width: $bp-medium) {
+      // Spanning the entire viewport
+      grid-column: 1 / -1;
+      // This row now comes first
+      // We have counted the rows by hand to know that it's 5
+      grid-row: 5 / 6;
+    }
   }
 
   // This element is not reusable, so in index.html we don't use the helper classes

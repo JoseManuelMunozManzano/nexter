@@ -18,6 +18,11 @@
   justify-items: center;
   row-gap: 2rem;
 
+  @media only screen and (max-width: $bp-medium) {
+    // Spanning the entire viewport
+    grid-column: 1 / -1;
+  }
+
   &__list {
     display: grid;
     // The first column is for the images and the second is for the text.
@@ -27,6 +32,15 @@
     // That's because on a really large screen, this start to look really ridiculous.
     row-gap: 5vh;
     align-items: center;
+
+    @media only screen and (max-width: $bp-medium) {
+      // image - text - image - text - image - text
+      grid-template-columns: repeat(3, min-content max-content);
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      grid-template-columns: min-content max-content;
+    }
   }
 
   &__img {
